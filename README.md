@@ -22,12 +22,13 @@ docker build -t mininet-macos:lastest .
 -t, –tty, Allocate a pseudo-TTY
 --rm, Automatically remove the container when it exits
 --network=host: for connecting to host and host ip
---privileged, mininet need root
+--privileged, mininet needs root
+-v /lib/modules:/lib/modules, openvswitch needs /lib/modules/4.9.93-linuxkit-aufs
 
 # Create container and open bash
-docker run -it --network=host --privileged --rm mininet-macos:lastest
+docker run -it --network=host --privileged -v /lib/modules:/lib/modules --rm mininet-macos:lastest
 # Create container in background and open bash
-docker run -it --network=host --privileged -d mininet-macos:lastest
+docker run -it --network=host --privileged -v /lib/modules:/lib/modules -d mininet-macos:lastest
 docker exec -it <CONTAINER_ID> bash
 
 # Get Host IP
