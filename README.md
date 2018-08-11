@@ -13,7 +13,7 @@
 
 ## Usage
 
-```
+```bash
 # Build DockerFile
 docker build -t mininet-macos:lastest .
 
@@ -48,7 +48,7 @@ mn --topo=tree,depth=2 --controller=remote,ip=192.168.65.2,port=6653
 - https://stackoverflow.com/questions/41886752/how-to-get-mac-host-ip-address-from-a-docker-container
     - docker.for.mac.localhost which will resolve to the internal IP address used by the host.
 
-```
+```bash
 # apt install
 curl: curl
 dnsutils: nslookup, host, dig
