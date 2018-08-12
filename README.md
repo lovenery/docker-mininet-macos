@@ -14,21 +14,18 @@
 ## Usage
 
 ```bash
-# Build DockerFile
-docker build -t mininet-macos:lastest .
-
-# run options
--i, –interactive, Keep STDIN open even if not attached
--t, –tty, Allocate a pseudo-TTY
---rm, Automatically remove the container when it exits
---network=host: for connecting to host and host ip
---privileged, mininet needs root
--v /lib/modules:/lib/modules, openvswitch needs /lib/modules/4.9.93-linuxkit-aufs
-
-# Create container and open bash
-docker run -it --network=host --privileged -v /lib/modules:/lib/modules --rm mininet-macos:lastest
-# Create container in background and open bash
-docker run -it --network=host --privileged -v /lib/modules:/lib/modules -d mininet-macos:lastest
+# Run container using Docker Compose
+docker-compose run --rm my-mininet
+# Run container
+docker run -it --network=host --privileged -v /lib/modules:/lib/modules --rm lovenery/mininet-macos
+## OR ##
+# Run all container
+docker-compose up -d
+# Detach mode
+docker-compose run -d my-mininet
+# Detach mode
+docker run -it --network=host --privileged -v /lib/modules:/lib/modules -d lovenery/mininet-macos
+# Get shell
 docker exec -it <CONTAINER_ID> bash
 
 # Get Host IP
@@ -50,16 +47,20 @@ mn --topo=tree,depth=2 --controller=remote,ip=192.168.65.2,port=6653
     - docker.for.mac.localhost which will resolve to the internal IP address used by the host.
 
 ```bash
+# Docker run options
+-i, –interactive, Keep STDIN open even if not attached
+-t, –tty, Allocate a pseudo-TTY
+--rm, Automatically remove the container when it exits
+--network=host: for connecting to host and host ip
+--privileged, mininet needs root
+-v /lib/modules:/lib/modules, openvswitch needs /lib/modules/4.9.93-linuxkit-aufs
+
 # apt install
-curl: curl
 dnsutils: nslookup, host, dig
 iproute2: ip
 iputils-ping: ping
 mininet: mn
 openvswitch-switch: ovs-vsctl, service openvswitch-switch
-
-# A little big directory
-rm -rf /var/lib/apt/lists/
 
 # https://davidwalsh.name/docker-remove-all-images-containers
 # Delete every Docker containers
@@ -67,4 +68,16 @@ rm -rf /var/lib/apt/lists/
 docker rm -f $(docker ps -a -q)
 # Delete every Docker image
 docker rmi -f $(docker images -q)
+
+# Tips to Reduce Docker Image Sizes
+https://hackernoon.com/tips-to-reduce-docker-image-sizes-876095da3b34
+# A little big directory
+rm -rf /var/lib/apt/lists/
+
+# Build DockerFile
+docker build -t lovenery/mininet-macos .
+
+# Push to dockerhub
+docker login -u lovenery
+docker push lovenery/mininet-macos
 ```

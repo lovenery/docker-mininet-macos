@@ -1,0 +1,9 @@
+version: '3'
+services:
+  my-mininet:
+    image: lovenery/mininet-macos
+    tty: true
+    network_mode: "host"
+    privileged: true
+    volumes:
+      - /lib/modules:/lib/modules
