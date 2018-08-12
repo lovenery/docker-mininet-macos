@@ -10,6 +10,7 @@
 
 - macOS 10.12.6
 - Docker version 18.06.0-ce
+- docker-compose version 1.22.0
 
 ## Usage
 
