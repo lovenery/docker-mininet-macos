@@ -11,6 +11,7 @@
 - macOS 10.12.6
 - Docker version 18.06.0-ce
 - docker-compose version 1.22.0
+- Lastest release Mininet (it's 2.2.2)
 
 ## Usage
 
